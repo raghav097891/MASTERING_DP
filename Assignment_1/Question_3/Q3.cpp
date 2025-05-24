@@ -1,4 +1,4 @@
-#include <iostream>//This algorithm has time complexity of O(n+k) where k=range so if the differnce btw the max and min number is less this algorithm can be used
+#include <iostream>//YES ,This algorithm has time complexity of O(n+k) where k=range so if the differnce btw the max and min number is less this algorithm can be used
 #include <vector>
 #include <algorithm>
 using namespace std;
