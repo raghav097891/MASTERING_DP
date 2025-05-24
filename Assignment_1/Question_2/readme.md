@@ -1,13 +1,12 @@
                                  Approach
+Detailed Explanation of the Approach
 At first, I tried the brute force method where I would generate all possible subsequences of the array and find the longest strictly increasing one. However, I realized this approach has a time complexity of 
 𝑂
 (
 2
 𝑛
 )
-O(2 
-n
- ), which is too slow for large inputs.
+, which is too slow for large inputs.
 
 To optimize, I started thinking about building the subsequence step by step from the start of the array:
 
@@ -37,8 +36,7 @@ log
 ⁡
 𝑛
 )
-O(nlogn) because each element is processed with a binary search.
-
+because each element is processed with a binary search.
 
 
 
