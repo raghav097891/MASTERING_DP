@@ -1,48 +1,53 @@
-At first, I thought about solving the problem by checking all possible subsequences of the given array and finding the longest increasing one. But this brute force method is very slow because there are 
+The problem is to find the length of the Longest Increasing Subsequence (LIS) in a given array.
+
+Brute Force (Naive) Approach
+Initially, one might consider generating all possible subsequences of the array and then checking which are strictly increasing to find the longest one. However, this brute force approach has a time complexity of 
+𝑂
+(
+2
+𝑛
+)
+O(2 
+n
+ ) because there are 
 2
 𝑛
 2 
 n
-  subsequences in total, and checking each one would take exponential time.
+  subsequences for an array of size 
+𝑛
+n. This is not feasible for large inputs.
 
-So, I tried to optimize this.
+Optimized Approach Using Binary Search
+To optimize, we use a greedy and binary search method with the following idea:
 
-Initial idea
-I started from the beginning of the array and maintained a temporary list tmp which would represent an increasing subsequence. The idea was:
+Maintain a temporary array tmp which helps track the smallest possible tail elements of increasing subsequences of various lengths.
 
-For each element in the array,
+Iterate through each element x in the input array:
 
-If the element is larger than the last element in tmp, I append it to tmp. This extends the increasing subsequence.
+If x is greater than the last element in tmp, append x to tmp.
+This means we found a longer increasing subsequence.
 
-But if the element is smaller or equal to some elements in tmp, I thought I could replace the last element of tmp with this smaller element to keep tmp "better" (meaning having a smaller last element).
+Otherwise, find the first element in tmp that is greater than or equal to x (using binary search) and replace that element with x.
+This step ensures that tmp remains sorted and the tail elements are as small as possible, keeping options open for future elements.
 
-Why this initial idea was not enough
-This naive replacement of the last element in tmp with a smaller element can cause us to miss some subsequences.
+Why this works
+The length of tmp at the end of the iteration equals the length of the LIS.
 
-For example, if:
+Replacing elements in tmp does not necessarily represent an actual subsequence from the original array; rather, it maintains minimal tail values for subsequences of each possible length.
 
-The first large element comes, so we add it at the end of tmp.
+By always trying to keep these tails as small as possible, the method allows longer increasing subsequences to be built efficiently.
 
-Then a smaller element appears, replacing the last element.
+This approach runs in 
+𝑂
+(
+𝑛
+log
+⁡
+𝑛
+)
+O(nlogn) time due to binary search, which is a significant improvement over the brute force method.
 
-Then an element larger than the last element but smaller than some other elements inside tmp appears, but since we replaced only the last element, we might have lost track of the possibility to build longer subsequences starting with different elements inside tmp.
 
-Correct idea: replace the element that is just greater than or equal to the current element
-To fix this, instead of always replacing the last element, we:
-
-Find the first element in tmp which is strictly greater than or equal to the current element (using binary search).
-
-Replace that element with the current element.
-
-This way, the list tmp always remains sorted and represents the smallest possible tail elements of increasing subsequences of different lengths.
-
-Why does this work?
-The length of tmp at the end will give the length of the longest increasing subsequence.
-
-We never lose potential subsequences because replacing the element with the current smaller element keeps options open for building longer increasing subsequences.
-
-Importantly, this process does NOT reconstruct the actual subsequence; it only gives the correct length.
-
-The tmp list acts like a tracker for the smallest possible ending elements of increasing subsequences by length.
 
 
