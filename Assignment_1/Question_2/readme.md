@@ -1,7 +1,5 @@
-The problem is to find the length of the Longest Increasing Subsequence (LIS) in a given array.
-
-Brute Force (Naive) Approach
-Initially, one might consider generating all possible subsequences of the array and then checking which are strictly increasing to find the longest one. However, this brute force approach has a time complexity of 
+Approach
+At first, I tried the brute force method where I would generate all possible subsequences of the array and find the longest strictly increasing one. However, I realized this approach has a time complexity of 
 𝑂
 (
 2
@@ -9,36 +7,29 @@ Initially, one might consider generating all possible subsequences of the array 
 )
 O(2 
 n
- ) because there are 
-2
-𝑛
-2 
-n
-  subsequences for an array of size 
-𝑛
-n. This is not feasible for large inputs.
+ ), which is too slow for large inputs.
 
-Optimized Approach Using Binary Search
-To optimize, we use a greedy and binary search method with the following idea:
+To optimize, I started thinking about building the subsequence step by step from the start of the array:
 
-Maintain a temporary array tmp which helps track the smallest possible tail elements of increasing subsequences of various lengths.
+I maintained a temporary vector tmp to keep track of an increasing subsequence.
 
-Iterate through each element x in the input array:
+For each element in the array, if it was larger than the last element in tmp, I simply appended it to tmp.
 
-If x is greater than the last element in tmp, append x to tmp.
-This means we found a longer increasing subsequence.
+But if the element was smaller, I thought about replacing the last element of tmp with this smaller element to keep tmp’s last element as small as possible. The idea was that by keeping the last element smaller, I could have a better chance to extend the subsequence later.
 
-Otherwise, find the first element in tmp that is greater than or equal to x (using binary search) and replace that element with x.
-This step ensures that tmp remains sorted and the tail elements are as small as possible, keeping options open for future elements.
+However, this approach didn’t always work because replacing the last element could cause me to miss better subsequences. For example, if a large element came first and then a smaller element came, replacing only the last element means I might lose some valid subsequences that could have been formed by replacing other elements inside tmp.
 
-Why this works
-The length of tmp at the end of the iteration equals the length of the LIS.
+To fix this, I decided to:
 
-Replacing elements in tmp does not necessarily represent an actual subsequence from the original array; rather, it maintains minimal tail values for subsequences of each possible length.
+Replace not just the last element, but the first element in tmp which is greater than or equal to the current element.
 
-By always trying to keep these tails as small as possible, the method allows longer increasing subsequences to be built efficiently.
+I found this position using binary search (upper_bound or lower_bound).
 
-This approach runs in 
+By doing this, I ensured tmp stays sorted and its elements represent the smallest possible tail values for increasing subsequences of each length.
+
+This method doesn’t actually build the subsequence itself but correctly computes its length. The length of tmp at the end is the length of the longest increasing subsequence.
+
+This approach improved the time complexity to 
 𝑂
 (
 𝑛
@@ -46,7 +37,8 @@ log
 ⁡
 𝑛
 )
-O(nlogn) time due to binary search, which is a significant improvement over the brute force method.
+O(nlogn) because each element is processed with a binary search.
+
 
 
 
