@@ -23,27 +23,18 @@ struct Product {
     double sellprice;
 };
 💬 Query
-cpp
-Copy
-Edit
 struct Query {
     int prodid;
     int quantity;
     double payoff;
 };
 👤 Customer
-cpp
-Copy
-Edit
 struct Customer {
     int customerid;
     vector<Query> queries;
     double budget;
 };
 💰 Transaction
-cpp
-Copy
-Edit
 struct transaction {
     string type;
     int prodid;
@@ -51,9 +42,6 @@ struct transaction {
     double value;
 };
 💾 Global Variables
-cpp
-Copy
-Edit
 unordered_map<int, Product> list_products;
 vector<transaction> transaction_log;
 double funds = 0;
