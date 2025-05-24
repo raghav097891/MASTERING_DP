@@ -1,41 +1,49 @@
-                                                              🛒 Shopkeeper Transaction Simulator
+# 🛒 Shopkeeper Transaction Simulator
 
 This C++ program simulates a shopkeeper managing stock, handling customer purchases, restocking inventory, taking loans if necessary, and tracking all financial transactions. It demonstrates object-oriented design, greedy query processing, and transaction logging.
 
-📌 Problem Overview
+## 📌 Problem Overview
+
 You are tasked with implementing a system that:
 
-Stores and manages products with stock, cost price, and selling price.
+- Stores and manages products with stock, cost price, and selling price.
+- Handles multiple customers, each with a budget and a set of purchase queries.
+- Sells products if customer budgets allow and restocks if stock is insufficient.
+- Takes loans when funds are insufficient to restock.
+- Maintains a transaction log and prints a summary of the day's profit or loss.
 
-Handles multiple customers, each with a budget and a set of purchase queries.
+## 🧱 Data Structures
 
-Sells products if customer budgets allow and restocks if stock is insufficient.
-
-Takes loans when funds are insufficient to restock.
-
-Maintains a transaction log and prints a summary of the day's profit or loss.
-
-🧱 Data Structures
-Product
+### 🏷️ Product
+```cpp
 struct Product {
     int id;
     int stock;
     double costprice;
     double sellprice;
 };
-Query
+💬 Query
+cpp
+Copy
+Edit
 struct Query {
     int prodid;
     int quantity;
     double payoff;
 };
-Customer
+👤 Customer
+cpp
+Copy
+Edit
 struct Customer {
     int customerid;
     vector<Query> queries;
     double budget;
 };
-Transaction
+💰 Transaction
+cpp
+Copy
+Edit
 struct transaction {
     string type;
     int prodid;
@@ -43,6 +51,9 @@ struct transaction {
     double value;
 };
 💾 Global Variables
+cpp
+Copy
+Edit
 unordered_map<int, Product> list_products;
 vector<transaction> transaction_log;
 double funds = 0;
@@ -120,3 +131,4 @@ Dynamic restocking with loan support
 Transaction logging for audit trail
 
 End-of-day profit and loan interest summary
+
