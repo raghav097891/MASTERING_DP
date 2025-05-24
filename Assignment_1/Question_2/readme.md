@@ -1,4 +1,5 @@
-                                 Approach
+                                     This Question just want us to find Longest increasing subsequence of echoes
+                                                                  Approach
 Detailed Explanation of the Approach
 At first, I tried the brute force method where I would generate all possible subsequences of the array and find the longest strictly increasing one. However, I realized this approach has a time complexity of 
 𝑂
