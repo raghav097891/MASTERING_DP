@@ -1,4 +1,5 @@
-🛒 Shopkeeper Transaction Simulator
+                                                              🛒 Shopkeeper Transaction Simulator
+
 This C++ program simulates a shopkeeper managing stock, handling customer purchases, restocking inventory, taking loans if necessary, and tracking all financial transactions. It demonstrates object-oriented design, greedy query processing, and transaction logging.
 
 📌 Problem Overview
