@@ -98,19 +98,11 @@ Profit/Loss = Funds - Interest.
 Queries are sorted by payoff so that the most profitable transactions are fulfilled first, maximizing gains within budget and stock constraints.
 
 📈 Financial Summary Format
-nginx
-Copy
-Edit
 Remaining Funds: $X.XX
 Total Loan Taken: $Y.YY
 Loan Interest (10%): $Z.ZZ
 Profit/Loss after Interest: $W.WW
-🛠️ How to Compile and Run
-bash
-Copy
-Edit
-g++ -std=c++11 shopkeeper.cpp -o shopkeeper
-./shopkeeper
+
 ✅ Features
 Greedy-based query fulfillment
 
