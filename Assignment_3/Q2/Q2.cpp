@@ -1,3 +1,4 @@
+(Backtracking the dp table according to best options)
 #include<bits/stdc++.h>
 using namespace std;
 void lcs(string& s1, string& s2,int i,int j,vector<vector<int>>& dp,string curr,set<string>& result){
