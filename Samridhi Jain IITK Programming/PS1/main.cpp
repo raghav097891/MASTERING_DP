@@ -16,8 +16,8 @@ void builddata() {
 void solution(){
     int k;
     cin>>k;
-    vector<int> current_path;
-    set<int> defaulted_banks;
+    vector<int> current_path;// this list stores banks of current round
+    set<int> defaulted_banks;//to check who is already dead, chosen set as it has data aldready stored in sorted order
     for(int i=0;i<k;i++){
         int bankno;
         cin>>bankno;
@@ -27,22 +27,24 @@ void solution(){
         }
     }
     sort(current_path.begin(), current_path.end());
+	//To ensure it stops when we have no more defaulting banks
     while(!current_path.empty()){
         for(int i=0;i<current_path.size();i++){
             cout<<current_path[i];
             if(i!=current_path.size())cout<<" ";
         }
         cout<<endl;
-        set<int> tmp;
+        set<int> tmp;//store and find defaulting banks for next round
         for(int i=0;i<current_path.size();i++){
             for(int lender: adjacent[current_path[i]]){
+				//Only defaulting this when it is not aldready defaulted
                 if(defaulted_banks.find(lender)==defaulted_banks.end()){
                     defaulted_banks.insert(lender);
                     tmp.insert(lender);
                 }
             }
         }
-        current_path.clear();
+        current_path.clear();//clearing old list
         for(int i: tmp){
             current_path.push_back(i);
         }
