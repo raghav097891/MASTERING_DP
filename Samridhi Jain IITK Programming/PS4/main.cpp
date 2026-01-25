@@ -16,19 +16,21 @@ void builddata() {
 }
 int main() {
 	builddata();
-	vector<int>no_of_borrowers(20,0);
+	vector<int>no_of_borrowers(20,0);//To calculate no. of borrowers for each bank
 	for(auto i: edges){
-	    no_of_borrowers[i.second]++;
+	    no_of_borrowers[i.second]++;//Adding no. of borrowers
 	}
-	queue<int>allowed_defaulting;
+	queue<int>allowed_defaulting;//To maintain the order in which they get defaulted and to store which all can be defaulted
+	//First finding the banks which have 0 borrowers to start defaulting 
 	for(int i=0;i<20;i++){
 	    if(no_of_borrowers[i]==0)allowed_defaulting.push(i);
 	}
 	while(!allowed_defaulting.empty()){
 	    int curr=allowed_defaulting.front();
-	    allowed_defaulting.pop();
+	    allowed_defaulting.pop();//Defaulted current bank
 	    cout<<curr;
 	    for(int lender: adjacent[curr]){
+			//To reduce no. of borrowers left , so that when the count becomes zero it can become ready to default
 	        no_of_borrowers[lender]--;
 	        if(no_of_borrowers[lender]==0){
 	            allowed_defaulting.push(lender);
