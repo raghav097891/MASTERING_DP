@@ -24,19 +24,19 @@ int maxdebt(int current_bank,vector<int>&dp){
         return dp[current_bank];//If aldready calculated why to calculate again 
     }
     int max_debt=0;
-	//Asking all its borrower how much max loss you can cause to me
+	//Asking all its borrower how much max exposure you can pass to me
     for(auto i: lender[current_bank]){
         int debtor_exposure=i.second;
         int debtor=i.first;
-        int curr_debt=maxdebt(debtor,dp)+debtor_exposure;// If it works in chain and we have to find max loss for this bank we will ask its borrower bank regarding what is their max + current exposure
+        int curr_debt=maxdebt(debtor,dp)+debtor_exposure;// It works in chain so for finding max exposure for this bank we will ask its borrower bank regarding what is their max + current exposure
         max_debt=max(max_debt,curr_debt);//Simple dp statement
     }
     return dp[current_bank]=max_debt;
 }
 int main() {
 	builddata();
-	vector<int>dp(20,-1);//Stores the max loss which can happen this bank
-	//Finding max loss by a chain of borrowing for each bank
+	vector<int>dp(20,-1);//Stores the max exposure which can happen this bank
+	//Finding max exposure by a chain of borrowing for each bank
 	for(int current_bank=0;current_bank<20;current_bank++){
 	    cout<<maxdebt(current_bank,dp);
 	    if(current_bank!=19)cout<<" ";
