@@ -12,6 +12,7 @@ vector<int> thresholds = {
     100, 0, 200, 30, 90, 0, 70, 170, 50, 80, 110, 40, 60, 130, 190, 120, 140, 180, 160, 150
 };
 vector<vector<pair<int, int>>> adjacent(20);
+//Building our graph
 void builddata() {
     int n=edges.size();
     for (int i=0;i<n;i++) {     
@@ -35,7 +36,7 @@ void solution(){
         }
     }
     sort(current_path.begin(), current_path.end());
-    //BFS style traversing
+    //BFS style traversing, which ensures to stop loop when no more banks are defaulting
     while(!current_path.empty()){
         for(int i=0;i<current_path.size();i++){
             cout<<current_path[i];
@@ -48,7 +49,7 @@ void solution(){
                 int lender=suffered.first;
                 int amt=suffered.second;
                 if(defaulted_banks.find(lender)==defaulted_banks.end()){
-                    current_amount_wasted[lender]+=amt;
+                    current_amount_wasted[lender]+=amt;//Add the total lost amount by banks borrower defaulting
                     if(current_amount_wasted[lender]>=thresholds[lender]){//If current waste amount cross the threshold for a bank
                         defaulted_banks.insert(lender);
                         tmp.insert(lender);
